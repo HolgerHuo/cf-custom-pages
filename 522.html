@@ -72,6 +72,7 @@
         $(function() {
             $.get("/cdn-cgi/trace",
                 function(data) {
+                    var str = data.match(/(colo=?)(\S*)/)[2];
                     var every = [
                         ['HKG', 'CloudFlare HKG'],
                         ['MFM', 'CloudFlare MFM'],
