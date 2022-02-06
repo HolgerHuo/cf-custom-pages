@@ -94,7 +94,7 @@
                     ];
                     for (var i = 0; i < every.length; i++) {
                         if (str == every[i][0]) {
-                            $("#result").append("You are accessing:[" + str + "]" + every[i][1] + ",Your IP:" + sip);
+                            $("#result").append("You are accessing: " + every[i][1] + ", Your IP: " + sip);
                         }
                     }
 
@@ -113,7 +113,7 @@
             </h1>
             <div style="display: none;">::CLOUDFLARE_ERROR_500S_BOX::</div>
             <p data-translate="process_is_automatic" style="font-size: 15px;">Event ID: ::RAY_ID:: Visitor IP: ::CLIENT_IP:: ::GEO::</p>
-            <h3 style="color: #adadad;"><small id="result"></small></h3>
+            <h3><small id="result"></small></h3>
         </div>
     </div>
 </body>
