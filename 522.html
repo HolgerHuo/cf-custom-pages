@@ -72,8 +72,6 @@
         $(function() {
             $.get("/cdn-cgi/trace",
                 function(data) {
-                    var sip = data.match(/(ip=?)(\S*)/)[2];
-                    var str = data.match(/(colo=?)(\S*)/)[2];
                     var every = [
                         ['HKG', 'CloudFlare HKG'],
                         ['MFM', 'CloudFlare MFM'],
@@ -94,7 +92,7 @@
                     ];
                     for (var i = 0; i < every.length; i++) {
                         if (str == every[i][0]) {
-                            $("#result").append("You are accessing: " + every[i][1] + ", Your IP: " + sip);
+                            $("#result").append(every[i][1]);
                         }
                     }
 
@@ -112,8 +110,7 @@
             <h1>The origin server cannot be accessed now. Refreshing...
             </h1>
             <div style="display: none;">::CLOUDFLARE_ERROR_500S_BOX::</div>
-            <p data-translate="process_is_automatic" style="font-size: 15px;">Event ID: ::RAY_ID:: Visitor IP: ::CLIENT_IP:: ::GEO::</p>
-            <h3><small id="result"></small></h3>
+            <p data-translate="process_is_automatic" style="font-size: 15px;">Event ID: ::RAY_ID:: Visitor IP: ::CLIENT_IP:: ::GEO:: Cloudflare Node: <span id="result"></span></p>
         </div>
     </div>
 </body>
