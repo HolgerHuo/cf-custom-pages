@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'>
+    <meta charset='utf-8'>
+    <meta http-equiv="refresh" content="3">
+    <title>The requested resource cannot be processed now - DragonFly Club</title>
+    <meta content='width=device-width,initial-scale=1' name='viewport'>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
+    <style>
+        html {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            font-size: 100%;
+            font: inherit;
+            vertical-align: baseline
+        }
+        
+        body {
+            line-height: 1;
+            font-family: "mastodon-font-sans-serif", sans-serif;
+            background: #191b22;
+            font-size: 13px;
+            line-height: 18px;
+            font-weight: 400;
+            color: #fff;
+            text-rendering: optimizelegibility;
+            font-feature-settings: "kern";
+            -webkit-text-size-adjust: none;
+            -moz-text-size-adjust: none;
+            text-size-adjust: none;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+            -webkit-tap-highlight-color: transparent;
+            overflow: hidden;
+        }
+        
+        body.error {
+            position: absolute;
+            text-align: center;
+            color: #9baec8;
+            background: #282c37;
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center
+        }
+        
+        body.error .dialog {
+            vertical-align: middle;
+            margin: 20px
+        }
+        
+        body.error .dialog__illustration img {
+            display: block;
+            max-width: 470px;
+            width: 100%;
+            height: auto;
+            margin-top: -120px
+        }
+        
+        body.error .dialog h1 {
+            font-size: 20px;
+            line-height: 28px;
+            font-weight: 400
+        }
+    </style>
+    <script>
+        $(function() {
+            $.get("/cdn-cgi/trace",
+                function(data) {
+                    var sip = data.match(/(ip=?)(\S*)/)[2];
+                    var str = data.match(/(colo=?)(\S*)/)[2];
+                    var every = [
+                        ['HKG', 'CloudFlare HKG'],
+                        ['MFM', 'CloudFlare MFM'],
+                        ['BKK', 'CloudFlare BKK'],
+                        ['TPE', 'CloudFlare TPE'],
+                        ['NRT', 'CloudFlare NRT'],
+                        ['KIX', 'CloudFlare KIX'],
+                        ['ICN', 'CloudFlare ICN'],
+                        ['LHR', 'CloudFlare LHR'],
+                        ['SIN', 'CloudFlare SIN'],
+                        ['CDG', 'CloudFlare CDG'],
+                        ['FRA', 'CloudFlare FRA'],
+                        ['KUL', 'CloudFlare LUL'],
+                        ['LAX', 'CloudFlare LAX'],
+                        ['SJC', 'CloudFlare SJC'],
+                        ['KBP', 'CloudFlare KBP'],
+                        ['PRG', 'CloudFlare PRG']
+                    ];
+                    for (var i = 0; i < every.length; i++) {
+                        if (str == every[i][0]) {
+                            $("#result").append("You are accessing:[" + str + "]" + every[i][1] + ",Your IP:" + sip);
+                        }
+                    }
+
+                });
+        })
+    </script>
+</head>
+
+<body class='error'>
+    <div class='dialog'>
+        <div class='dialog__illustration'>
+            <img alt='Mastodon' src='https://cdn.jsdelivr.net/gh/holgerhuo/cdn/picgo/oops.gif'>
+        </div>
+        <div class='dialog__message'>
+            <h1>The origin server cannot be accessed now. Refreshing...
+            </h1>
+            <p data-translate="process_is_automatic" style="font-size: 15px;">Event ID: ::RAY_ID:: Visitor IP: ::CLIENT_IP:: ::GEO::</p>
+            <h3 style="color: #adadad;"><small id="result"></small></h3>
+        </div>
+    </div>
+</body>
+
+</html>
